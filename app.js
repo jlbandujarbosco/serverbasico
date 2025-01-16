@@ -7,9 +7,18 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/saludo',(req,res)=>{
-    res.send('Hola');
+    const nombre = req.query.nombre || 'invitado';
+    const contrasena = req.query.contrasena || '1234'
+    res.send('Hola ' + nombre + ' ' + contrasena);
 })
 
+app.get('/precios',(req,res)=>{
+    res.send('<h1>Precios</h1><hr><p>Ordenador:1000€</p>');
+})
+
+app.get('*',(req,res)=>{
+    res.sendFile(__dirname + '/public/404.html');
+})
 app.listen(port,
     ()=>console.log(`Servidor 
         escuchando por el puerto ${port}`));
